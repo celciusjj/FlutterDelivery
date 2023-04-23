@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:udemy_flutter_delivery/src/pages/register/register_controller.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+
+  RegisterController controller = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -76,15 +78,16 @@ class RegisterPage extends StatelessWidget {
   Widget _buttonBack() {
     return SafeArea(
         child: Container(
-          margin: EdgeInsets.only(left: 10),
-          child: IconButton(
-            icon: Icon(Icons.arrow_back_ios, size: 30,),
-            onPressed: () => Get.back(),
-            color: Colors.white,
-
-          ),
-        )
-    );
+      margin: EdgeInsets.only(left: 10),
+      child: IconButton(
+        icon: Icon(
+          Icons.arrow_back_ios,
+          size: 30,
+        ),
+        onPressed: () => Get.back(),
+        color: Colors.white,
+      ),
+    ));
   }
 
   Widget _buttonRegister() {
@@ -94,7 +97,7 @@ class RegisterPage extends StatelessWidget {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 15)),
-          onPressed: () => {},
+          onPressed: () => controller.register(),
           child: Text("REGISTRARSE", style: TextStyle(color: Colors.black))),
     );
   }
@@ -103,9 +106,10 @@ class RegisterPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
+        controller: controller.emailController,
         keyboardType: TextInputType.emailAddress,
         decoration: InputDecoration(
-            hintText: "Correo electronico", prefixIcon: Icon(Icons.email)),
+            hintText: "Correo electrónico", prefixIcon: Icon(Icons.email)),
       ),
     );
   }
@@ -114,6 +118,7 @@ class RegisterPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: TextField(
+        controller: controller.nameController,
         keyboardType: TextInputType.text,
         decoration:
             InputDecoration(hintText: "Nombre", prefixIcon: Icon(Icons.person)),
@@ -125,9 +130,10 @@ class RegisterPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: TextField(
+        controller: controller.lastNameController,
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-            hintText: "Nombre", prefixIcon: Icon(Icons.person_outline)),
+            hintText: "Apellido", prefixIcon: Icon(Icons.person_outline)),
       ),
     );
   }
@@ -136,6 +142,7 @@ class RegisterPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: TextField(
+        controller: controller.phoneNumberController,
         keyboardType: TextInputType.phone,
         decoration: InputDecoration(
             hintText: "Telefono", prefixIcon: Icon(Icons.phone)),
@@ -147,6 +154,7 @@ class RegisterPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: TextField(
+        controller: controller.passwordController,
         keyboardType: TextInputType.text,
         obscureText: true,
         decoration: InputDecoration(
@@ -159,10 +167,11 @@ class RegisterPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: TextField(
+        controller: controller.confirmPasswordController,
         keyboardType: TextInputType.text,
         obscureText: true,
         decoration: InputDecoration(
-            hintText: "Contraseña", prefixIcon: Icon(Icons.lock)),
+            hintText: "Confirmar contraseña", prefixIcon: Icon(Icons.lock)),
       ),
     );
   }
@@ -170,6 +179,9 @@ class RegisterPage extends StatelessWidget {
   Widget _textYourInfo() {
     return Container(
         margin: EdgeInsets.only(top: 40, bottom: 30),
-        child: Text("INGRESA ESTA INFOMACIÓN"));
+        child: Text(
+          "INGRESA ESTA INFOMACIÓN",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ));
   }
 }
